@@ -13,7 +13,7 @@ set -e
 # ─────────────────────────────────────────────────────────────────────────────
 # Configuration - Edit these as needed
 # ─────────────────────────────────────────────────────────────────────────────
-OPENPROJECT_IMAGE="quay.io/ryan_nix/openproject-openshift:17"
+OPENPROJECT_IMAGE="quay.io/ryan_nix/openproject-openshift:latest"
 
 # Colors
 RED='\033[0;31m'

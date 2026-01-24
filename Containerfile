@@ -29,11 +29,13 @@ RUN chmod +x /openshift-entrypoint.sh \
 
 # Puma listens on port 8080 (OpenShift friendly)
 ENV PORT=8080
+ENV OPENPROJECT_RAILS__RELATIVE__URL__ROOT=
 EXPOSE 8080
 
 # Run as non-root user (OpenShift will override with random UID)
 USER 1000
 
 # Start via OpenShift-compatible entrypoint
+# Use 'web' command for external database setup (not all-in-one supervisord)
 ENTRYPOINT ["/openshift-entrypoint.sh"]
-CMD ["./docker/prod/supervisord"]
+CMD ["./docker/prod/web"]
