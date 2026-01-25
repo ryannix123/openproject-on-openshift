@@ -382,6 +382,34 @@ EOF
     oc rollout status deployment/openproject --timeout=600s
 
     # ─────────────────────────────────────────────────────────────────────────
+    # Save credentials to file
+    # ─────────────────────────────────────────────────────────────────────────
+    cat > openproject-credentials.txt <<CREDS
+OpenProject Deployment Credentials
+===================================
+Generated: $(date)
+Project: ${PROJECT}
+
+URL: https://${ROUTE_HOST}
+
+Admin Credentials:
+  Username: admin
+  Password: ${ADMIN_PASSWORD}
+
+Database Credentials:
+  Host: postgresql
+  Port: 5432
+  Database: openproject
+  User: openproject
+  Password: ${DB_PASSWORD}
+
+DATABASE_URL: postgresql://openproject:${DB_PASSWORD}@postgresql:5432/openproject
+
+IMPORTANT: Keep this file secure and delete after noting credentials!
+CREDS
+    chmod 600 openproject-credentials.txt
+
+    # ─────────────────────────────────────────────────────────────────────────
     # Summary
     # ─────────────────────────────────────────────────────────────────────────
     echo ""
@@ -395,17 +423,27 @@ EOF
     echo "  Username: admin"
     echo "  Password: ${ADMIN_PASSWORD}"
     echo ""
-    echo "Database credentials:"
-    echo "  Host: postgresql"
-    echo "  Database: openproject"
-    echo "  User: openproject"
-    echo "  Password: ${DB_PASSWORD}"
-    echo ""
-    echo "Save these credentials - they won't be shown again!"
+    echo "Credentials saved to: openproject-credentials.txt"
     echo ""
 }
 
 cleanup() {
+    log "This will delete ALL OpenProject resources including data!"
+    echo ""
+    echo "Resources to be deleted:"
+    echo "  - Deployments: openproject, postgresql"
+    echo "  - Services: openproject, postgresql"
+    echo "  - Route: openproject"
+    echo "  - Secrets: openproject-secret, postgresql-secret"
+    echo "  - PVCs: openproject-assets-pvc, postgresql-pvc"
+    echo ""
+    read -p "Are you sure you want to delete everything? (yes/no): " confirm
+    
+    if [[ "$confirm" != "yes" ]]; then
+        warn "Cleanup cancelled."
+        exit 0
+    fi
+    
     log "Cleaning up OpenProject deployment..."
     
     oc delete deployment openproject postgresql --ignore-not-found
@@ -413,6 +451,12 @@ cleanup() {
     oc delete route openproject --ignore-not-found
     oc delete secret openproject-secret postgresql-secret --ignore-not-found
     oc delete pvc openproject-assets-pvc postgresql-pvc --ignore-not-found
+    
+    # Remove credentials file if it exists
+    if [[ -f "openproject-credentials.txt" ]]; then
+        rm -f openproject-credentials.txt
+        log "Removed openproject-credentials.txt"
+    fi
     
     log "Cleanup complete!"
 }
