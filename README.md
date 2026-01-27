@@ -1,10 +1,12 @@
-[![Build and Push Container](https://github.com/ryannix123/openproject-on-openshift/actions/workflows/build-image.yml/badge.svg)](https://github.com/ryannix123/openproject-on-openshift/actions/workflows/build-image.yml)
 # 🚀 OpenProject on OpenShift — Zero Privilege Deployment
 
 [![OpenShift](https://img.shields.io/badge/OpenShift-4.x-red?logo=redhatopenshift)](https://www.redhat.com/en/technologies/cloud-computing/openshift)
 [![OpenProject](https://img.shields.io/badge/OpenProject-17-blue?logo=openproject)](https://www.openproject.org)
 [![SCC](https://img.shields.io/badge/SCC-restricted-brightgreen)](https://docs.openshift.com/container-platform/latest/authentication/managing-security-context-constraints.html)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue?logo=postgresql)](https://www.postgresql.org)
+[![CentOS](https://img.shields.io/badge/CentOS-Stream%209-purple?logo=centos&logoColor=white)](https://www.centos.org)
+[![Quay.io](https://img.shields.io/badge/Quay.io-Container-red?logo=redhat&logoColor=white)](https://quay.io)
+[![Build and Push Container](https://github.com/ryannix123/openproject-on-openshift/actions/workflows/build-image.yml/badge.svg)](https://github.com/ryannix123/openproject-on-openshift/actions/workflows/build-image.yml)
 
 > **Deploy OpenProject on OpenShift without ANY elevated privileges.** No `anyuid`. No `privileged`. Just pure, security-hardened container goodness designed for multi-tenancy.
 
