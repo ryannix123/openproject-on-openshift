@@ -1,4 +1,4 @@
-# 🚀 OpenProject on OpenShift — Zero Privilege Deployment
+# OpenProject on OpenShift — Zero Privilege Deployment
 
 [![OpenShift](https://img.shields.io/badge/OpenShift-4.x-red?logo=redhatopenshift)](https://www.redhat.com/en/technologies/cloud-computing/openshift)
 [![OpenProject](https://img.shields.io/badge/OpenProject-17-blue?logo=openproject)](https://www.openproject.org)
