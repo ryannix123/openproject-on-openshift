@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://www.openproject.org/assets/images/logo/logo-openproject-centered-horizontal.svg" alt="OpenProject Logo" width="400">
+  <img src="https://www.openproject.org/assets/images/press/openproject-logo-centered-color-1923bef6.svg" alt="OpenProject Logo" width="400">
 </p>
 
 <h1 align="center">OpenProject on OpenShift — Zero Privilege Deployment</h1>
