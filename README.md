@@ -8,7 +8,7 @@
   <a href="https://www.redhat.com/en/technologies/cloud-computing/openshift"><img src="https://img.shields.io/badge/OpenShift-4.x-red?logo=redhatopenshift" alt="OpenShift"></a>
   <a href="https://www.openproject.org"><img src="https://img.shields.io/badge/OpenProject-17-blue?logo=openproject" alt="OpenProject"></a>
   <a href="https://docs.openshift.com/container-platform/latest/authentication/managing-security-context-constraints.html"><img src="https://img.shields.io/badge/SCC-restricted-brightgreen" alt="SCC"></a>
-  <a href="https://www.postgresql.org"><img src="https://img.shields.io/badge/PostgreSQL-16-blue?logo=postgresql" alt="PostgreSQL"></a>
+  <a href="https://www.postgresql.org"><img src="https://img.shields.io/badge/PostgreSQL-18-blue?logo=postgresql" alt="PostgreSQL"></a>
   <a href="https://www.ruby-lang.org"><img src="https://img.shields.io/badge/Ruby-3.x-CC342D?logo=ruby&logoColor=white" alt="Ruby"></a>
   <a href="https://www.centos.org"><img src="https://img.shields.io/badge/CentOS-Stream%209-purple?logo=centos&logoColor=white" alt="CentOS"></a>
   <a href="https://quay.io"><img src="https://img.shields.io/badge/Quay.io-Container-red?logo=redhat&logoColor=white" alt="Quay.io"></a>
