@@ -14,6 +14,7 @@ set -e
 # Configuration - Edit these as needed
 # ─────────────────────────────────────────────────────────────────────────────
 OPENPROJECT_IMAGE="quay.io/ryan_nix/openproject-openshift:latest"
+POSTGRESQL_IMAGE="quay.io/fedora/postgresql-18:latest"
 
 # Colors
 RED='\033[0;31m'
@@ -57,7 +58,8 @@ deploy() {
     
     local PROJECT=$(oc project -q)
     info "Deploying to project: $PROJECT"
-    info "Using image: $OPENPROJECT_IMAGE"
+    info "Using OpenProject image: $OPENPROJECT_IMAGE"
+    info "Using PostgreSQL image: $POSTGRESQL_IMAGE"
     
     # Generate credentials
     local DB_PASSWORD=$(gen_password)
@@ -105,7 +107,7 @@ EOF
     # ─────────────────────────────────────────────────────────────────────────
     # PostgreSQL Deployment
     # ─────────────────────────────────────────────────────────────────────────
-    log "Deploying PostgreSQL..."
+    log "Deploying PostgreSQL 18..."
     oc apply -f - <<EOF
 apiVersion: apps/v1
 kind: Deployment
@@ -128,7 +130,7 @@ spec:
     spec:
       containers:
         - name: postgresql
-          image: registry.redhat.io/rhel9/postgresql-16:latest
+          image: ${POSTGRESQL_IMAGE}
           ports:
             - containerPort: 5432
           env:
@@ -160,15 +162,18 @@ spec:
           readinessProbe:
             exec:
               command:
-                - /usr/libexec/check-container
+                - /bin/sh
+                - -c
+                - pg_isready -U \$POSTGRESQL_USER -d \$POSTGRESQL_DATABASE -h 127.0.0.1
             initialDelaySeconds: 5
             periodSeconds: 10
           livenessProbe:
             exec:
               command:
-                - /usr/libexec/check-container
-                - --live
-            initialDelaySeconds: 120
+                - /bin/sh
+                - -c
+                - pg_isready -U \$POSTGRESQL_USER -d \$POSTGRESQL_DATABASE -h 127.0.0.1
+            initialDelaySeconds: 30
             periodSeconds: 10
       volumes:
         - name: data
@@ -263,6 +268,8 @@ spec:
       labels:
         app: openproject
     spec:
+      securityContext:
+        fsGroup: 0
       containers:
         - name: openproject
           image: ${OPENPROJECT_IMAGE}
@@ -404,6 +411,8 @@ Database Credentials:
   Password: ${DB_PASSWORD}
 
 DATABASE_URL: postgresql://openproject:${DB_PASSWORD}@postgresql:5432/openproject
+
+PostgreSQL Image: ${POSTGRESQL_IMAGE}
 
 IMPORTANT: Keep this file secure and delete after noting credentials!
 CREDS
