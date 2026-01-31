@@ -51,7 +51,7 @@ Your data persists in the PVCs — only the pods are stopped during hibernation.
 
 - ✅ CentOS Stream 9 + Ruby on Rails + Puma
 - ✅ Runs as non-root (OpenShift restricted SCC compatible)
-- ✅ External PostgreSQL 16 with proper health checks
+- ✅ External PostgreSQL 18.1 with proper health checks
 - ✅ Persistent storage for assets and database
 - ✅ Auto-migration on startup
 - ✅ Background job processing included
@@ -125,8 +125,8 @@ oc new-project openproject
 ┌─────────────────────────▼───────────────────────────────────┐
 │                   PostgreSQL Pod                            │
 │  ┌──────────────────────────────────────────────────────┐  │
-│  │              PostgreSQL 16 (RHEL9)                   │  │
-│  │         registry.redhat.io/rhel9/postgresql-16       │  │
+│  │              PostgreSQL 18.1 (Fedora)                   │  │
+│  │         quay.io/fedora/postgresql-18:latest      │  │
 │  └─────────────────────────┬────────────────────────────┘  │
 │                            │                               │
 │  ┌─────────────────────────▼────────────────────────────┐  │
