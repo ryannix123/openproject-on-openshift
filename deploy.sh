@@ -268,8 +268,19 @@ spec:
       labels:
         app: openproject
     spec:
-      securityContext:
-        fsGroup: 0
+      initContainers:
+        - name: fix-permissions
+          image: ${OPENPROJECT_IMAGE}
+          command:
+            - /bin/sh
+            - -c
+            - |
+              mkdir -p /var/openproject/assets/attachments
+              chmod -R g+rwX /var/openproject/assets
+              echo "Permissions fixed for attachments directory"
+          volumeMounts:
+            - name: assets
+              mountPath: /var/openproject/assets
       containers:
         - name: openproject
           image: ${OPENPROJECT_IMAGE}
