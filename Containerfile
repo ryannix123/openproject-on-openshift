@@ -2,13 +2,12 @@
 # Based on official OpenProject slim image with OpenShift compatibility
 #
 # Author: Ryan Nix <ryan.nix@gmail.com>
-# License: MIT
 
 FROM openproject/openproject:17-slim
 
 LABEL maintainer="Ryan Nix <ryan.nix@gmail.com>" \
       description="OpenProject for OpenShift - runs without root" \
-      version="17"
+      version="17.0.2"
 
 # Switch to root to make modifications
 USER root
